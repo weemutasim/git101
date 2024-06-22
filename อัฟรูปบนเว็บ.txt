@@ -1,0 +1,32 @@
+// import รูปบนเว็บ
+import 'package:flutter/foundation.dart' show kIsWeb;
+String? _imagePath;        
+  Future<void> _getImageFromGallery() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imagePath = pickedFile.path;
+      });
+    } else {
+      print('No image selected.');
+    }
+  }
+
+//นำไปใช้
+      _imagePath == null
+                ? Text('No image selected.')
+                : kIsWeb
+                    ? Image.network(
+                        _imagePath!,
+                        width: 300,
+                        height: 300,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.file(
+                        File(_imagePath!),
+                        width: 300,
+                        height: 300,
+                        fit: BoxFit.cover,
+                      ),
