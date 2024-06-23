@@ -1,0 +1,167 @@
+// import รูปบนเว็บ
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+String? _imagePath;        
+  Future<void> _getImageFromGallery() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imagePath = pickedFile.path;
+      });
+    } else {
+      print('No image selected.');
+    }
+  }
+
+//นำไปใช้
+      _imagePath == null
+                ? Text('No image selected.')
+                : kIsWeb
+                    ? Image.network(
+                        _imagePath!,
+                        width: 300,
+                        height: 300,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.file(
+                        File(_imagePath!),
+                        width: 300,
+                        height: 300,
+                        fit: BoxFit.cover,
+                      ),
+
+//TextInput พร้อมเช็ค validate
+  final TextEditingController _idCamera = TextEditingController();
+  final TextEditingController _ipAddress = TextEditingController();
+  final TextEditingController _address = TextEditingController();
+  final TextEditingController _model = TextEditingController();
+  final TextEditingController _nvr = TextEditingController();
+  final TextEditingController _assetCode = TextEditingController();
+
+            child: Form(
+              key: _formKey,
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.baseline,
+                children: <Widget>[
+                  TextFormField(
+                    controller: _idCamera,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'ชื่อกล้อง',
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'กรุณากรอกชื่อกล้อง';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  TextFormField(
+                    controller: _ipAddress,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'IP Address',
+                    ),
+                    // obscureText: true,
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'กรุณากรอก IP Address';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  TextFormField(
+                    controller: _address,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'สถานที่',
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'กรุณากรอกสถานที่';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  TextFormField(
+                    controller: _model,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'ยี่ห้อ',
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'กรุณากรอกยี่ห้อ';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  TextFormField(
+                    controller: _assetCode,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'รหัสทรัพย์สิน',
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'กรุณากรอกรหัสทรัพย์สิน';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  TextFormField(
+                    controller: _nvr,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'รุ่น',
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'กรุณาระบุชื่อรุ่น';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 50,
+                    child: OutlinedButton(
+                      onPressed: () => _getImageFromGallery(),
+                      style: OutlinedButton.styleFrom(
+                          // side: const BorderSide(
+                          //     width: 1,
+                          //     color: Colors.black,
+                          // ),
+                          shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadius.circular(3),
+                      )),
+                      child: const Text('รูปภาพ',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                          )),
+                    ),
+                  ),
+);
