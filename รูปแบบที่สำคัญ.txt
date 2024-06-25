@@ -212,3 +212,7 @@ Image.network(
                           );
                         },
                       ),
+// อ่านรูปภาพสำหรับเว๋บ
+  <script type="text/javascript">
+      window.flutterWebRenderer = "html";
+  </script>
