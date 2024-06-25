@@ -216,3 +216,28 @@ Image.network(
   <script type="text/javascript">
       window.flutterWebRenderer = "html";
   </script>
+
+//search แบบ json to datrt
+  void filterSearchResults(String query) {
+    List<Listcctv> dummySearchList = [];
+    dummySearchList.addAll(listcctv);
+    if (query.isNotEmpty) {
+      List<Listcctv> dummyListData = [];
+      dummySearchList.forEach((item) {
+        if (item.address.toString().toLowerCase().contains(query)) {
+          dummyListData.add(item);
+        }
+      });
+      setState(() {
+        filteredList.clear();
+        filteredList.addAll(dummyListData);
+      });
+      return;
+    } else {
+      setState(() {
+        filteredList.clear();
+        filteredList.addAll(listcctv);
+      });
+      
+    }
+  }
