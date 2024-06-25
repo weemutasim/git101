@@ -198,3 +198,17 @@ Future<List<String>?> uploadImage(String image) async {
   }
 
 
+Image.network(
+                        'http://pfclapi.synology.me/~F0143/personpic/${userName.text}.jpg',
+                        fit: BoxFit.cover,
+                        width: 150,
+                        height: 150,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/notperson.png',
+                            fit: BoxFit.cover,
+                            width: 150,
+                            height: 150,
+                          );
+                        },
+                      ),
