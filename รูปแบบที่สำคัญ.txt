@@ -167,3 +167,32 @@ String? _imagePath;
 );
 
 https://github.com/vagish1/Flutter-App.git
+
+Future<List<String>?> uploadImage(String image) async {
+    FormData formData = FormData.fromMap(
+      {
+        "param": "saveatt",
+        "filetype": "jpg",
+        "filedata": image,
+        "agentcode": "",
+      },
+    );
+
+    String domain2 =
+        "http://61.19.77.244/reservation/promptjong/ticketapi/datamodule/promptjonapi.php";
+
+    String urlAPI = domain2;
+    var result;
+    try {
+      Response response = await Dio().post(urlAPI, data: formData);
+      result = response.data['url'];
+      urlPic = '';
+      if (result != null) {
+        urlPic = result;
+      }
+      print('return => ${response.data['url']}');
+    } catch (e) {
+      print('Error $e');
+    }
+    return result;
+  }
