@@ -286,3 +286,14 @@ Padding(
                   obscureText: isPassword,
             ),
           )
+
+//DateTime
+import 'package:intl/intl.dart';
+  String formattedDateTime = '';
+
+  @override
+  void initState() {
+    super.initState();
+    DateTime now = DateTime.now();
+    formattedDateTime = DateFormat('dd/MM/yyyy HH:mm:ss').format(now);
+  }
