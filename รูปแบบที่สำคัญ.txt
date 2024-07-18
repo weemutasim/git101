@@ -297,3 +297,54 @@ import 'package:intl/intl.dart';
     DateTime now = DateTime.now();
     formattedDateTime = DateFormat('dd/MM/yyyy HH:mm:ss').format(now);
   }
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: GestureDetector(
+            onTap: () => setState(() => selected = !selected),
+            child: AnimatedContainer(
+              width: selected ? screenWidth - 40 : screenWidth / 2,
+              height: selected ? screenHeight : screenHeight,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: selected ? Colors.amber : Colors.pink,
+              ),
+              duration: const Duration(seconds: 3),
+              curve: Curves.fastEaseInToSlowEaseOut,
+            ),
+          ),
+        ),
+        Expanded(
+          child: AnimatedSwitcher(
+            duration: const Duration(seconds: 3),
+            // reverseDuration: const Duration(seconds: 1),
+            switchOutCurve: Curves.fastLinearToSlowEaseIn,
+            child: selected
+                ? const SizedBox
+                    .shrink()
+                : Padding(
+                  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0, right: 20.0),
+                  child: Container(
+                      key: ValueKey<bool>(selected),
+                      width: screenWidth / 2,
+                      height: screenHeight,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.pink,
+                      ),
+                    ),
+                ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
