@@ -348,3 +348,7 @@ import 'package:intl/intl.dart';
   }
 }
 
+register /
+เวลาเปิดปิด
+สำหรับ agen only
+ถ้าลูกค้าทั่วไป ให้ไปจองหน้าเว็บ
